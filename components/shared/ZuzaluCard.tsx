@@ -66,6 +66,8 @@ function ZuzaluQR({ card }: { card: ZuIdCard }) {
       const response = await fetch('https://unruly-local-specialist.glitch.me/passport');
       if (!response.ok) {
         throw new Error('Failed to retrieve data from the server');
+      } else {
+        console.log("pinged server!")
       }
       //const data = await response.json();
 
