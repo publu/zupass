@@ -121,11 +121,6 @@ async function loadInitialState(): Promise<ZuState> {
   return { self, encryptionKey, pcds, identity, modal };
 }
 
-// Redirect old site visitors to the correct site
-if (!["zupass.org", "localhost"].includes(window.location.hostname)) {
-  window.location.replace("https://zupass.org/" + window.location.hash);
-}
-
 const root = createRoot(document.querySelector("#root"));
 root.render(
   <RollbarProvider>

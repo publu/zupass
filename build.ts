@@ -32,7 +32,7 @@ const opts: BuildOptions = {
         }
       : {}),
   },
-  outdir: "public/js",
+  outdir: "docs/js",
 };
 
 run(process.argv[2])
@@ -49,7 +49,7 @@ async function run(command: string) {
       const ctx = await context(opts);
       await ctx.watch();
       const { host } = await ctx.serve({
-        servedir: "public",
+        servedir: "docs",
         port: 3000,
         host: "0.0.0.0",
       });
