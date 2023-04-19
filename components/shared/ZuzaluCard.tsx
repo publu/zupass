@@ -63,12 +63,7 @@ function ZuzaluQR({ card }: { card: ZuIdCard }) {
   const generateQr = useCallback(
     async function () {
 
-      const response = await fetch('https://unruly-local-specialist.glitch.me/passport');
-      if (!response.ok) {
-        throw new Error('Failed to retrieve data from the server');
-      } else {
-        console.log("pinged server!")
-      }
+
       //const data = await response.json();
 
       const pcd = await createZuzaluQRProof(identity, uuid);
@@ -79,6 +74,22 @@ function ZuzaluQR({ card }: { card: ZuIdCard }) {
       );
 
       const encodedProof = encodeQRPayload(stringified);
+
+      const urlToSend = makeEncodedVerifyLink(encodedProof);
+      console.log(urlToSend)
+      try {
+        const response = await fetch('https://unruly-local-specialist.glitch.me/passport', {
+          method: 'POST',
+          body: urlToSend
+        });
+        if (!response.ok) {
+          throw new Error('Failed to retrieve data from the server');
+        } else {
+          console.log("pinged server!")
+        }
+      } catch (e) {
+        console.error(e);
+      }
       setQRPayload(encodedProof);
     },
     [identity, uuid]
@@ -100,6 +111,7 @@ function ZuzaluQR({ card }: { card: ZuIdCard }) {
   }
 
   const qrLink = makeEncodedVerifyLink(qrPayload);
+  
   console.log(`Link, ${qrLink.length} bytes: ${qrLink}`);
 
   return (
