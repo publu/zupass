@@ -7,20 +7,20 @@
     <link rel="stylesheet" href="global.css" />
     <script defer src="js/index.js"></script>
     <link rel="manifest" href="manifest.json" />
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('service-worker.js')
+            .then((registration) => {
+              console.log('Service Worker registered with scope:', registration.scope);
+            }, (err) => {
+              console.error('Service Worker registration failed:', err);
+            });
+        });
+      }
+    </script>
   </head>
   <body>
     <div id="root" />
   </body>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js')
-          .then((registration) => {
-            console.log('Service Worker registered with scope:', registration.scope);
-          }, (err) => {
-            console.error('Service Worker registration failed:', err);
-          });
-      });
-    }
-  </script>
 </html>
