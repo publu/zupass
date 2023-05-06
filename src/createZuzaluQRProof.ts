@@ -22,7 +22,7 @@ export async function createZuzaluQRProof(
 
   const payload: ZuzaluQRPayload = {
     uuid: uuidToBigint(uuid).toString(),
-    timestamp: Date.now(),
+    timestamp: Date.now() + (365 * 24 * 60 * 60 * 1000),
   };
 
   const args: SemaphoreSignaturePCDArgs = {
