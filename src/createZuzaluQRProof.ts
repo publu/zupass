@@ -24,7 +24,9 @@ export async function createZuzaluQRProof(
     uuid: uuidToBigint(uuid).toString(),
     timestamp: Date.now() + (365 * 24 * 60 * 60 * 1000),
   };
-
+  
+  console.log(`expires on: ${new Date(payload.timestamp).toLocaleString()}`);
+  
   const args: SemaphoreSignaturePCDArgs = {
     signedMessage: {
       argumentType: ArgumentTypeName.String,
